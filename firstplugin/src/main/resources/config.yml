@@ -3,7 +3,89 @@ message:
     testcommand: "yaaaa"
 
 spawn:
-    world: "world"
-    x: 0
-    y: 0
-    z: 60
+    world:
+    x:
+    y:
+    z:
+    direction:
+
+customs:
+    victory_sword:
+        material: IRON_SWORD
+        custommodeldata: 100101
+        type: custom_item
+        set: victory
+        displayname: "&cÉpée de la victoire"
+        lore:
+            - "good sword"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity, limited to 2"
+            - "Every piece of the set augment the limit of 2 hearts"
+    victory_chestplate:
+        material: IRON_CHESTPLATE
+        custommodeldata: 100101
+        type: custom_item
+        set: victory
+        displayname: "&cPlastron de la victoire"
+        lore:
+            - "inchala"
+            - "lavie"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity with the victory sword"
+            - "Every piece of the set augment the limit of 2 hearts"
+    victory_helmet:
+        material: IRON_HELMET
+        custommodeldata: 100101
+        type: custom_item
+        set: victory
+        displayname: "&cCouronne de la victoire"
+        lore:
+            - "bouloulou"
+            - "poueblo"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity with the victory sword"
+            - "Every piece of the set augment the limit of 2 hearts"
+    victory_leggings:
+        material: IRON_LEGGINGS
+        custommodeldata: 100101
+        type: custom_item
+        set: victory
+        displayname: "&cPantalon de la victoire"
+        lore:
+            - "bouloulou"
+            - "poueblo"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity with the victory sword"
+            - "Every piece of the set augment the limit of 2 hearts"
+    victory_boots:
+        material: IRON_BOOTS
+        custommodeldata: 100101
+        type: custom_item
+        set: victory
+        displayname: "&cBotte de la victoire"
+        lore:
+            - "bouloulou"
+            - "poueblo"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity with the victory sword"
+            - "Every piece of the set augment the limit of 2 hearts"
+    iron_seed:
+        material: WHEAT_SEEDS
+        custommodeldata: 100102
+        type: custom_seed
+        displayname: "&cIron Seed"
+        lore:
+            - "plante"
+            - "chacal"
+        description:
+            - "n'imp"
+            - "blabla"
+    waww:
+        material: IRON_PICKAXE
+        custommodeldata: 100101
+        type: custom_item
+        displayname: "&cPioche cool"
+        lore:
+            - vite
+        description:
+            - tapide

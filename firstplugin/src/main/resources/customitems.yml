@@ -1,0 +1,12 @@
+customs:
+    victory_sword:
+        material: IRON_SWORD
+        custommodeldata: 1
+        type: custom_item
+        set: victory
+        displayname: "&cÉpée de la victoire"
+        lore:
+            - "good sword"
+        description:
+            - "You gain 1 absorption heart every time you kill an entity, limited to 2"
+            - "Every piece of the set augment the limit of 2 hearts"

@@ -11,9 +11,16 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import fr.bafbi.myplugin.Main;
 import fr.bafbi.myplugin.custom.CustomItems;
 
 public class Customgive implements TabExecutor {
+
+    private Main main;
+
+    public Customgive(Main main) {
+        this.main = main;
+    }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

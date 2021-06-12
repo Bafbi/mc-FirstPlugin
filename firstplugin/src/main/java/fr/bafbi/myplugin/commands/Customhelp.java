@@ -40,9 +40,9 @@ public class Customhelp implements TabExecutor {
         } else {
             String customItemName = args[0];
 
-            for (String Description : CustomItems.getCustomItemDescription(customItemName)) {
-                sender.sendMessage(Description);
-            }
+            // for (String Description : CustomItems.getCustomItemDescription(customItemName)) {
+            //     sender.sendMessage(Description);
+            // }
         }
 
         

@@ -1,7 +1,6 @@
 package fr.bafbi.myplugin.custom;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -9,112 +8,93 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.persistence.PersistentDataType;
 
 import fr.bafbi.myplugin.Main;
 
 public class CustomItems {
 
-    private static ItemStack VICTORY_SWORD() {
-
-        ItemStack customsword = new ItemStack(Material.IRON_SWORD, 1);
-        ItemMeta customMeta = customsword.getItemMeta();
-
-        customMeta.setCustomModelData(1);
-
-        customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "customItem"), PersistentDataType.INTEGER, 1);
-        customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "victory_sword"), PersistentDataType.INTEGER, 1);
-
-        customMeta.setDisplayName(ChatColor.RED + "Épée de la victoire");
-        customMeta.setLore(Arrays.asList(ChatColor.DARK_PURPLE + "Victory Set",ChatColor.GRAY + "Custom Item"));
-
-        customsword.setItemMeta(customMeta);
-
-        return customsword;
-
-    } 
-    private static List<String> VICTORY_SWORD_DESCRIPTION() {
-        List<String> description = new ArrayList<>();
-
-        description.add(ChatColor.GRAY + "Custom Item : Victory Sword");
-        description.add(ChatColor.DARK_PURPLE + "Set : Victory Set");
-        description.add(ChatColor.YELLOW + "You gain 1 absorption heart every time you kill an entity, limited to 2");
-        description.add(ChatColor.YELLOW + "Every piece of the set augment the limit of 2 hearts");
-
-        return description;
-    }
-
-    private static ItemStack VICTORY_CHESTPLATE() {
-
-        ItemStack customsword = new ItemStack(Material.IRON_CHESTPLATE, 1);
-        ItemMeta customMeta = customsword.getItemMeta();
-
-        customMeta.setCustomModelData(1);
-
-        customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "customItem"), PersistentDataType.INTEGER, 1);
-        customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "victory_set"), PersistentDataType.INTEGER, 1);
-
-        customMeta.setDisplayName(ChatColor.RED + "Plastron de la victoire");
-        customMeta.setLore(Arrays.asList(ChatColor.DARK_PURPLE + "Victory Set",ChatColor.GRAY + "Custom Item"));
-
-        customsword.setItemMeta(customMeta);
-
-        return customsword;
-
-    } 
-    
-
     public static List<String> getCustomItemsList() {
+
+        FileConfiguration config = Main.getPlugin().getConfig();
+
         List<String> customItemsList = new ArrayList<>();
 
-        customItemsList.add("victory_sword");
-        customItemsList.add("victory_chestplate");
+        for (String customItemId : config.getConfigurationSection("customs").getKeys(false)) {
+
+            customItemsList.add(customItemId);
+
+        }
 
         return customItemsList;
 
     }
 
-    public static ItemStack getCustomItem(String name) {
+    public static ItemStack getCustomItem(String customItemIdName) {
 
-        ItemStack customItem = null;
-
-        switch (name.toLowerCase()) {
-            case "victory_sword":
-                customItem = VICTORY_SWORD();
-                break;
-            case "victory_chestplate":
-                customItem = VICTORY_CHESTPLATE();
-                break;
+        FileConfiguration config = Main.getPlugin().getConfig();
         
-            default:
-                break;
-        }
+        for (String customItemId : config.getConfigurationSection("customs").getKeys(false)) {
 
-        if(name.equalsIgnoreCase("victory_sword")) {
-            customItem = VICTORY_SWORD();
-        }
+            if (customItemId.equalsIgnoreCase(customItemIdName)) {
 
-        return customItem;
+                ItemStack customitem = new ItemStack(Material.getMaterial(config.getString("customs." + customItemId + ".material")), 1);
+                ItemMeta customMeta = customitem.getItemMeta();
+
+                customMeta.setCustomModelData(config.getInt("customs." + customItemId + ".custommodeldata"));
+
+                customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), config.getString("customs." + customItemId + ".type")), PersistentDataType.INTEGER, 1);
+                customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), customItemId), PersistentDataType.INTEGER, 1);
+        
+                customMeta.setDisplayName(config.getString("customs." + customItemId + ".displayname").replace("&", "§"));
+
+                List<String> loreList = new ArrayList<>();
+                List<String> configLore = config.getStringList("customs." + customItemId + ".lore");
+                for (String unformatedLore : configLore) {
+                    loreList.add(unformatedLore.replace("&", "§"));
+                }
+
+                if(config.contains("customs." + customItemId + ".set")) {
+
+                    loreList.add(ChatColor.GRAY + capFirst(config.getString("customs." + customItemId + ".set")) + " Set");
+                    customMeta.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), config.getString("customs." + customItemId + ".set") + "_set"), PersistentDataType.INTEGER, 1);
+
+                }
+
+                loreList.add(ChatColor.DARK_GRAY + typeFormat(config.getString("customs." + customItemId + ".type")));
+
+                customMeta.setLore(loreList);
+
+                customitem.setItemMeta(customMeta);
+
+                return customitem;
+
+            }
+        }
+        
+        return null;
+        
+    }
+
+    private static String capFirst(String string) {
+    
+        return Character.toUpperCase(string.charAt(0)) + string.substring(1);
 
     }
 
-    public static List<String> getCustomItemDescription(String name) {
+    private static String typeFormat(String string) {
 
-        List<String> description = null;
+        String formatedString = null;
 
-        switch (name.toLowerCase()) {
-            case "victory_sword":
-                description = VICTORY_SWORD_DESCRIPTION();
-                break;
-        
-            default:
-                break;
+        for (String word : string.split("_")) {
+            if (word.equalsIgnoreCase(string.split("_")[0])) formatedString = capFirst(word);
+            else formatedString = formatedString + " " + capFirst(word);
         }
-
-        return description;
+    
+        return formatedString;
 
     }
-
 
 
 

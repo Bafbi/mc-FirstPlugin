@@ -4,30 +4,45 @@ version: 0.1
 main: fr.bafbi.myplugin.Main
 api-version: 1.16
 commands:
+  #Test command
   test:
     description: Une commande de test.
     permission: test.use
     usage: "Usage: /<command>"
+
+  #Broadcast command
   alert:
     description: Envoie une alerte à tout le serveur.
     permission: alert.use
     aliases: [broadcast]
     usage: "Usage: /<command> <message>"
+
+  #Spawn command
   spawn:
     description: Teleporte le joueur au spawn du serveur.
     permission: spawn.use
     aliases: [hub, lobby]
     usage: "Usage: /<command>"
+
+  setspawn:
+    description: Set le spawn au coordonné du joueur ou à des coordonnés donné.
+    permission: setspawn.use
+    usage: "Usage: /<command> [<position>]"
+
+  #Custom item command
   customgive:
     description: Donne un item custom.
     permission: customgive.use
     aliases: [givecustom]
     usage: "Usage: /<command> <targets> <customItem> [<count>]"
+
   customhelp:
     description: Toggle la fiche d'aide d'un item custom, affiche l'aide dans le chat de l'item mis en argument.
     permission: customhelp.use
     aliases: [itemhelp]
     usage: "Usage: /<command> [<customItem>]"
+
+  #Farmrun command
   farmrun:
     description: ouvre le menu de farmrun
     permission: farmrungui.use
