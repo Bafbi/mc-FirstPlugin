@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import fr.bafbi.myplugin.custom.CustomItems;
+import fr.bafbi.myplugin.custom.CustomItemsOld;
 
 public class Customhelp implements TabExecutor {
 
@@ -18,7 +18,7 @@ public class Customhelp implements TabExecutor {
         List<String> tabComplete = new ArrayList<>();
 
         if(args.length == 1) {
-            for (String CustomItem : CustomItems.getCustomItemsList()) {
+            for (String CustomItem : CustomItemsOld.getCustomItemsList()) {
                 if (CustomItem.startsWith(args[1])) {
                     tabComplete.add(CustomItem);
                 }

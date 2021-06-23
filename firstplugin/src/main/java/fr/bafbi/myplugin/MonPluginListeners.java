@@ -171,6 +171,8 @@ public class MonPluginListeners implements Listener {
 
                     block.setType(Material.NETHER_SPROUTS);
 
+                    player.sendMessage(block.getBlockData().toString()); 
+
                     // Growplant growage1 = new Growplant(block);
                     // growage1.runTaskLater(main, 18000 + Math.round(Math.random() * 4000) * Integer.parseInt(Bukkit.gameru));
                 

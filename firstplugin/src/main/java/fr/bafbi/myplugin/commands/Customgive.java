@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import fr.bafbi.myplugin.Main;
-import fr.bafbi.myplugin.custom.CustomItems;
+import fr.bafbi.myplugin.custom.CustomItemsOld;
 
 public class Customgive implements TabExecutor {
 
@@ -30,7 +30,7 @@ public class Customgive implements TabExecutor {
             tabComplete = null;
         }
         if(args.length == 2) {
-            for (String CustomItem : CustomItems.getCustomItemsList()) {
+            for (String CustomItem : CustomItemsOld.getCustomItemsList()) {
                 if (CustomItem.startsWith(args[1])) {
                     tabComplete.add(CustomItem);
                 }
@@ -52,7 +52,7 @@ public class Customgive implements TabExecutor {
                 sender.sendMessage(ChatColor.YELLOW + "Invalid player name: " + ChatColor.RED + targetName);
             } else {
                 String customItemName = args[1];
-                ItemStack customItem = CustomItems.getCustomItem(customItemName);
+                ItemStack customItem = CustomItemsOld.getCustomItem(customItemName);
 
                 if (customItem == null) {
                     sender.sendMessage(ChatColor.YELLOW + "Invalid custom item name: " + ChatColor.RED + customItemName);
